@@ -66,7 +66,7 @@ export default function HomePage() {
       />
       <PlaceholderSection
         id="reviews"
-        eyebrow="고객 후기"
+        eyebrow="고객 인터뷰"
         stars
         title={
           <>
@@ -79,7 +79,7 @@ export default function HomePage() {
         }
         body="WEFLOW가 직접 제작한 결과물, 실제 고객 인터뷰로 확인하세요."
         image="/images/main/main-review-01.png"
-        imageAlt="WEFLOW 고객 후기"
+        imageAlt="WEFLOW 고객 인터뷰"
         imageCount={1}
       />
       <TargetCustomerSection />
