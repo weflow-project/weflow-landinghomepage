@@ -14,6 +14,9 @@ function getDaysInMonth(y: number, m: number) { return new Date(y, m + 1, 0).get
 function getFirstDay(y: number, m: number) { return new Date(y, m, 1).getDay() }
 function pad(n: number) { return String(n).padStart(2, '0') }
 
+// 상담 예약 내역 DB 저장 임시 중단 — 제출 버튼 비활성화 (재개하려면 false 로)
+const SUBMIT_DISABLED = true
+
 export default function BookingSection() {
   const today = new Date()
   const [year, setYear] = useState(today.getFullYear())
@@ -71,6 +74,7 @@ export default function BookingSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (SUBMIT_DISABLED) return
     if (!selectedDay || (!selectedSlot && !customTime) || !form.name || !form.phone || !form.type || !form.agree) {
       setShowErrors(true)
       const firstId =
@@ -341,7 +345,7 @@ export default function BookingSection() {
               {showErrors && !form.agree && (
                 <p className="field-error" style={{ marginTop: '-0.5rem' }}>개인정보 수집에 동의해 주세요</p>
               )}
-              <button type="submit" className="btn-primary" disabled={loading}
+              <button type="submit" className="btn-primary" disabled={SUBMIT_DISABLED || loading}
                 style={{ fontSize: '1.15rem', padding: '1.1rem', justifyContent: 'center', width: '100%' }}>
                 {loading ? '접수 중...' : '예약 신청하기'}
               </button>

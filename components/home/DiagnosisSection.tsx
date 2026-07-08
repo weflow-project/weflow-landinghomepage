@@ -24,6 +24,9 @@ const TRUST = [
   { label: '부담 없음', sub: '강요 없는 상담' },
 ]
 
+// 문의 내역 DB 저장 임시 중단 — 제출 버튼 비활성화 (재개하려면 false 로)
+const SUBMIT_DISABLED = true
+
 export default function DiagnosisSection() {
   const [form, setForm] = useState({ name: '', phone: '', type: '', industry: '', note: '', agree: false })
   const [submitted, setSubmitted] = useState(false)
@@ -61,6 +64,7 @@ export default function DiagnosisSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (SUBMIT_DISABLED) return
     if (!form.name || !form.phone || !form.type || !form.agree) {
       setShowErrors(true)
       const firstId =
@@ -298,7 +302,7 @@ export default function DiagnosisSection() {
                   <p className="field-error" style={{ marginTop: '-0.5rem' }}>개인정보 수집에 동의해 주세요</p>
                 )}
 
-                <button type="submit" className="btn-primary" disabled={loading}
+                <button type="submit" className="btn-primary" disabled={SUBMIT_DISABLED || loading}
                   style={{ fontSize: '1.05rem', padding: '1rem', justifyContent: 'center', width: '100%', marginTop: '0.25rem' }}>
                   {loading ? '제출 중...' : '무료 진단 신청하기 →'}
                 </button>

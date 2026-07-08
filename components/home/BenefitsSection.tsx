@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
 
@@ -158,22 +157,6 @@ export default function BenefitsSection() {
               >
                 {b.desc}
               </p>
-
-              {/* 자세히 보기 */}
-              <Link
-                href="/pricing"
-                className="callout semibold c-accent"
-                style={{
-                  marginTop: "auto",
-                  textDecoration: "none",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.3rem",
-                  fontSize: "1rem",
-                }}
-              >
-                자세히 보기 ›
-              </Link>
             </div>
           ))}
         </Reveal>

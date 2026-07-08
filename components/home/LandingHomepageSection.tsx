@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
 import { Rows3, Anchor, Target } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -141,25 +142,17 @@ export default function LandingHomepageSection() {
             </div>
           </Reveal>
 
-          {/* 오른쪽 이미지 (추후 교체) */}
+          {/* 오른쪽 이미지 — 원본 비율 그대로(자르지 않음) */}
           <Reveal as="div" variant="right" className="lhd-img">
-            <div
-              style={{
-                width: "100%",
-                aspectRatio: "4 / 3",
-                borderRadius: "var(--radius-2xl)",
-                background: "#e6eaf1",
-                border: "1px dashed rgba(11,18,32,0.14)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "var(--text-secondary)",
-                fontSize: "0.9rem",
-                fontWeight: 600,
-                letterSpacing: "0.02em",
-              }}
-            >
-              이미지
+            <div className="lhd-img-frame">
+              <Image
+                src="/images/main/main-landing-home-01.png"
+                alt="랜딩형 홈페이지"
+                width={751}
+                height={820}
+                sizes="(max-width: 768px) 100vw, 370px"
+                style={{ display: "block", width: "100%", height: "auto" }}
+              />
             </div>
           </Reveal>
         </div>
@@ -172,10 +165,20 @@ export default function LandingHomepageSection() {
           gap: clamp(1.75rem, 4vw, 3.5rem);
         }
         .lhd-text { flex: 1; min-width: 0; }
-        .lhd-img { flex: 1; min-width: 0; }
+        .lhd-img { flex: 1; min-width: 0; margin-top: -1.25rem; }
+        .lhd-img-frame {
+          display: block;
+          width: 100%;
+          max-width: 370px;
+          margin: 0 auto;
+          overflow: hidden;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-2xl);
+          box-shadow: 0 10px 30px rgba(11, 18, 32, 0.1);
+        }
         @media (max-width: 768px) {
           .lhd-split { flex-direction: column; align-items: stretch; }
-          .lhd-img { max-width: 360px; }
+          .lhd-img { max-width: 360px; margin-top: 0; }
         }
       `}</style>
     </section>

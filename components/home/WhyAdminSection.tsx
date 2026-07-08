@@ -52,6 +52,13 @@ const POINTS: Point[] = [
   },
 ];
 
+// 이미지 원본 치수(비율 유지·자르지 않기 위함)
+const IMG_DIMS = [
+  { w: 1190, h: 1322 },
+  { w: 1122, h: 1402 },
+  { w: 1397, h: 1126 },
+];
+
 export default function WhyAdminSection() {
   const ref = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -160,27 +167,22 @@ export default function WhyAdminSection() {
               </p>
             </div>
 
-            {/* 이미지 */}
+            {/* 이미지 — 원본 비율 그대로(자르지 않음) */}
             <div className="wa-img">
-              <div
+              <Image
+                src={`/images/main/main-adminwhy-0${i + 1}.png`}
+                alt={p.title}
+                width={IMG_DIMS[i].w}
+                height={IMG_DIMS[i].h}
+                sizes="(max-width: 768px) 100vw, 480px"
                 style={{
-                  position: "relative",
+                  display: "block",
                   width: "100%",
-                  aspectRatio: "4 / 3",
+                  height: "auto",
                   borderRadius: "var(--radius-2xl)",
-                  overflow: "hidden",
-                  background: "#e6eaf1",
                   border: "1px solid var(--border)",
                 }}
-              >
-                <Image
-                  src={`/images/main/main-adminwhy-0${i + 1}.png`}
-                  alt={p.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 480px"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
+              />
             </div>
           </div>
         ))}
@@ -217,8 +219,8 @@ export default function WhyAdminSection() {
           padding: clamp(1.25rem, 3vw, 2rem);
         }
         @media (max-width: 768px) {
-          /* 모바일: 모든 행을 이미지 → 설명 순서로 (DOM은 텍스트가 먼저라 column-reverse) */
-          .wa-row, .wa-row.reverse { flex-direction: column-reverse; }
+          /* 모바일: 이미지 → 설명 순서(column-reverse) + stretch로 이미지 폭 붕괴 방지 */
+          .wa-row, .wa-row.reverse { flex-direction: column-reverse; align-items: stretch; }
         }
         /* 파란 키워드 흔들림 (화면 진입 후 7초마다 잠깐) — WhatIs와 동일 */
         .wa-stat { transform-origin: center bottom; }
