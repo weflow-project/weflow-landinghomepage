@@ -90,6 +90,8 @@ export default function DiagnosisSection() {
       if (!res.ok) throw new Error('request failed')
       setLoading(false)
       setShowErrors(false)
+      // 완료 화면이 그려지기 전에 해당 섹션 위로 (스크롤이 움직이는 게 안 보이도록)
+      document.getElementById('diagnosis')?.scrollIntoView({ behavior: 'auto', block: 'start' })
       setSubmitted(true)
       sessionStorage.removeItem('weflow_form_intent')
     } catch {
