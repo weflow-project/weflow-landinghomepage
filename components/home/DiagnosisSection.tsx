@@ -24,8 +24,8 @@ const TRUST = [
   { label: '부담 없음', sub: '강요 없는 상담' },
 ]
 
-// 문의 내역 DB 저장 임시 중단 — 제출 버튼 비활성화 (재개하려면 false 로)
-const SUBMIT_DISABLED = true
+// 문의 접수 사용 중 — 막으려면 true 로
+const SUBMIT_DISABLED = false
 
 export default function DiagnosisSection() {
   const [form, setForm] = useState({ name: '', phone: '', type: '', industry: '', note: '', agree: false })
